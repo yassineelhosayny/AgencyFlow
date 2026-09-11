@@ -33,12 +33,29 @@ $id_attivita=101;
 $budget="2500.75";
 $stato = true;
 $sconto = null;
-$iva = 0.22;
+const IVA = 0.22;
 
-echo "tipo: ", var_dump($nome_progetto) , "Budget iniziale: ",var_dump($budget),PHP_EOL;
+echo "tipo: ", var_dump($nome_progetto) , "Budget iniziale: ",PHP_EOL;
+var_dump($budget);
 
 if(is_numeric($budget)){
     $budget = (float)$budget;
 }
 echo "tipo Budget attuale: ", var_dump($budget);
+$scontoEff = $sconto ?? 0;
+$valoreIVA = $budget * IVA;
+$comprensivoIVA = $valoreIVA + $budget;
 
+$valoreSconto = $comprensivoIVA * $scontoEff;
+$totaleFinale = $comprensivoIVA - $valoreSconto;
+
+
+echo "================================= Progetto ==================================",PHP_EOL;
+echo "Cliente: ",$nome_cliente,PHP_EOL;
+echo "Progetto: ",$nome_progetto,PHP_EOL;
+echo "numero attività: ",$id_attivita,PHP_EOL;
+echo "Attivo: ",$stato ? "Si" : "No", PHP_EOL;
+echo "Budget originale: ",$budget,PHP_EOL;
+echo "IVA: ",$valoreIVA,PHP_EOL;
+echo "Sconto: ",$valoreSconto,PHP_EOL;
+echo "Totale finale: ",$totaleFinale,PHP_EOL;
